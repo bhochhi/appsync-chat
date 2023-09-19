@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "serverless-appsync-plugin": "^1.0.5",
+    "serverless-appsync-plugin": "^1.14.0",
     "serverless-stack-output": "^0.2.3"
   },
   "devDependencies": {
-    "aws-sdk": "^2.344.0"
+    "aws-sdk": "^2.1460.0"
   },
   "scripts": {
     "front": "cd front && npm start"
