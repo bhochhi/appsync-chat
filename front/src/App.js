@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Amplify, { Auth, graphqlOperation } from "aws-amplify";
+import {Amplify, Auth, graphqlOperation } from "aws-amplify";
 import { withAuthenticator } from "aws-amplify-react";
 import { Connect } from "aws-amplify-react";
 
