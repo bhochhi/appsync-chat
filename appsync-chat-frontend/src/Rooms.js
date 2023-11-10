@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react'
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API } from 'aws-amplify';
 
 import theme from './theme'
@@ -14,7 +14,7 @@ const SET_ROOMS = "SET_ROOMS";
 const SET_LOADING = "SET_LOADING";
 
 const initialState = {
-  loading: false,
+  // loading: false,
   rooms: [],
   loading: true
 }
@@ -35,7 +35,7 @@ function reducer(state, action) {
 export default function Rooms() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inputValue, setInputValue] = useState('');
-  const history = useHistory();
+  const history = useNavigate();
   let subscription;
 
   useEffect(() => {

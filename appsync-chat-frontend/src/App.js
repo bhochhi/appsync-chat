@@ -1,7 +1,7 @@
 import React from 'react';
-import { AmplifyAuthenticator, AmplifySignUp } from '@aws-amplify/ui-react';
+import { Authenticator } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
-import { HashRouter, Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, BrowserRouter,Routes } from 'react-router-dom';
 
 import Chat from './Chat';
 import Rooms from './Rooms';
@@ -13,7 +13,7 @@ const { primaryColor } = theme;
 function Router() {
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <div style={topLevelContainerStyle}>
           <div style={headerStyle}>
             <a href="/" style={homeLinkStyle}>
@@ -30,19 +30,16 @@ function Router() {
           </nav>
         </div>
         <div style={mainViewContainerStyle}>
-          <Switch>
-            <Route exact path="/">
-              <Rooms />
+          <Routes>
+            <Route exact path="/" element={<Rooms />}>
             </Route>
-            <Route path="/chat/:name/:id">
-              <Chat />
+            <Route path="/chat/:name/:id" element={<Chat />}>
             </Route>
-            <Route exact path="/profile">
-              <Profile />
+            <Route exact path="/profile" element={<Profile />}>
             </Route>
-          </Switch>
+          </Routes>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   )
 }
@@ -53,12 +50,14 @@ function App() {
     Auth.currentAuthenticatedUser()
       .then(user => updateUser(user))
       .catch(() => console.log('No signed in user.'));
-      Hub.listen('auth', data => {
+    Hub.listen('auth', data => {
       switch (data.payload.event) {
         case 'signIn':
           return updateUser(data.payload.data);
         case 'signOut':
           return updateUser(null);
+        default:
+
       }
     });
   }, []);
@@ -66,15 +65,16 @@ function App() {
     return <Router />
   }
   return (
-    <AmplifyAuthenticator>
-      <AmplifySignUp slot="sign-up"
-        formFields={[
-          { type: "username" },
-          { type: "password" },
-          { type: "email" }
-        ]}
-      />
-    </AmplifyAuthenticator>
+    <Authenticator loginMechanisms={['email']}>
+      {({ signOut, user }) => (
+        <div className="App">
+          <p>
+            Hey {user.username}, welcome to my channel, with auth!
+          </p>
+          <button onClick={signOut}>Sign out</button>
+        </div>
+      )}
+    </Authenticator>
   )
 }
 
