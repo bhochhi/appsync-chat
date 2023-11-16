@@ -4,14 +4,16 @@
 4. cdk deploy
 ![cdk deploy](image.png)
 
-- creates, appSync cdk-chat-app, user and room dynamodb table. cognito userpool  
+- creates, appSync cdk-chat-app, user and room dynamodb table. cognito userpool
 
 
 
-4. Building client app for appSync API(using amplify graphql client): https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app.html 
+4. Building client app for appSync API(using amplify graphql client): https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app.html
 
 
-
+===
+To Run the frontend locally when backend appsync is ready...
+-
 
 
 Resources:
